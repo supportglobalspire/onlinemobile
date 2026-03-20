@@ -1,0 +1,1336 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Global Spire Credit Union | Secure Banking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; transition: background-color 0.3s, color 0.3s; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f766e 100%); }
+        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.2); }
+        .glass-dark { background: rgba(30, 41, 59, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .floating { animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        .feature-icon { background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%); }
+        .text-gradient { background: linear-gradient(135deg, #38bdf8 0%, #34d399 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hidden-balance { filter: blur(8px); user-select: none; }
+        .card-gradient { background: linear-gradient(135deg, #1e3a8a 0%, #0ea5e9 100%); }
+        .card-gradient-gold { background: linear-gradient(135deg, #b45309 0%, #fbbf24 100%); }
+        .card-gradient-locked { background: linear-gradient(135deg, #7f1d1d 0%, #dc2626 100%); }
+        .slide-in { animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        .fade-in { animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+        @keyframes shake { 10%, 90% { transform: translate3d(-1px, 0, 0); } 20%, 80% { transform: translate3d(2px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-4px, 0, 0); } 40%, 60% { transform: translate3d(4px, 0, 0); } }
+        .loader { border: 3px solid #f3f3f3; border-radius: 50%; border-top: 3px solid #3498db; width: 24px; height: 24px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .notification-badge { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .locked-overlay { position: absolute; inset: 0; background: rgba(127, 29, 29, 0.9); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 50; border-radius: 1.5rem; }
+        .image-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .image-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+        body.dark-mode { background-color: #0f172a; color: #e2e8f0; }
+        body.dark-mode .bg-white { background-color: #1e293b; }
+        body.dark-mode .bg-slate-50 { background-color: #0f172a; }
+        body.dark-mode .text-slate-800 { color: #e2e8f0; }
+        body.dark-mode .text-slate-900 { color: #f1f5f9; }
+        body.dark-mode .text-slate-600 { color: #94a3b8; }
+        body.dark-mode .text-slate-500 { color: #64748b; }
+        body.dark-mode .text-slate-700 { color: #cbd5e1; }
+        body.dark-mode .border-slate-200 { border-color: #334155; }
+        body.dark-mode .border-slate-700 { border-color: #475569; }
+        body.dark-mode .bg-slate-100 { background-color: #334155; }
+        body.dark-mode .bg-slate-800 { background-color: #1e293b; }
+        body.dark-mode .bg-slate-700 { background-color: #334155; }
+        body.dark-mode .hover\:bg-slate-100:hover { background-color: #334155; }
+        body.dark-mode .hover\:bg-slate-50:hover { background-color: #1e293b; }
+        body.dark-mode .bg-blue-100 { background-color: rgba(59, 130, 246, 0.2); }
+        body.dark-mode .bg-emerald-100 { background-color: rgba(16, 185, 129, 0.2); }
+        body.dark-mode .bg-purple-100 { background-color: rgba(168, 85, 247, 0.2); }
+        body.dark-mode .bg-pink-100 { background-color: rgba(236, 72, 153, 0.2); }
+        body.dark-mode .bg-orange-100 { background-color: rgba(249, 115, 22, 0.2); }
+        body.dark-mode .bg-indigo-100 { background-color: rgba(99, 102, 241, 0.2); }
+        body.dark-mode .bg-red-100 { background-color: rgba(239, 68, 68, 0.2); }
+        body.dark-mode .glass-card { background: rgba(30, 41, 59, 0.95); border-color: rgba(255, 255, 255, 0.1); }
+        body.dark-mode #notifications-panel { background-color: #1e293b; }
+        body.dark-mode #mobile-menu { background-color: #1e293b; border-color: #334155; }
+        .theme-toggle { transition: transform 0.3s ease; }
+        .theme-toggle:hover { transform: rotate(20deg); }
+    </style>
+<script src="https://www.kimi.com/sdk-seed.js" defer=""></script></head>
+<body class="bg-slate-50 text-slate-800 overflow-x-hidden">
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="showPage(&#39;landing-page&#39;)">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-teal-500 rounded-xl flex items-center justify-center">
+                        <i data-lucide="landmark" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-slate-800 tracking-tight">Global Spire</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-4" id="nav-links">
+                    <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 transition theme-toggle" title="Toggle Dark Mode">
+                        <i data-lucide="moon" id="theme-icon" class="w-5 h-5 text-slate-600"></i>
+                    </button>
+                    <button onclick="toggleLoginModal()" class="text-slate-600 hover:text-blue-600 font-medium transition">Sign In</button>
+                    <button onclick="showSignupPage()" class="bg-slate-900 text-white px-6 py-2.5 rounded-full font-medium hover:bg-slate-800 transition transform hover:scale-105">Open Account</button>
+                </div>
+                <div class="flex items-center space-x-2 md:hidden">
+                    <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 transition theme-toggle">
+                        <i data-lucide="moon" id="theme-icon-mobile" class="w-5 h-5 text-slate-600"></i>
+                    </button>
+                    <button class="p-2" onclick="toggleMobileMenu()">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-4 space-y-3">
+                <button onclick="toggleLoginModal(); toggleMobileMenu();" class="w-full bg-slate-100 text-slate-900 py-3 rounded-lg font-medium">Sign In</button>
+                <button onclick="showSignupPage(); toggleMobileMenu();" class="w-full bg-slate-900 text-white py-3 rounded-lg font-medium">Open Account</button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="landing-page" class="page-section">
+        <section class="relative min-h-screen gradient-bg flex items-center pt-20 overflow-hidden">
+            <div class="absolute inset-0 overflow-hidden">
+                <div class="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+                <div class="absolute bottom-20 right-10 w-96 h-96 bg-teal-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style="animation-delay: 2s;"></div>
+            </div>
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="text-center lg:text-left space-y-8">
+                        <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
+                            <span class="flex h-2 w-2 relative">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                            </span>
+                            <span class="text-emerald-300 text-sm font-medium">Now Serving 2M+ Members Worldwide</span>
+                        </div>
+                        <h1 class="text-5xl lg:text-7xl font-bold text-white leading-tight">Banking Without <br/><span class="text-gradient">Borders</span></h1>
+                        <p class="text-xl text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed">Experience secure, seamless banking with real-time transfers, advanced fraud protection, and 24/7 access to your finances.</p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <button onclick="showSignupPage()" class="bg-white text-slate-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-slate-100 transition transform hover:scale-105 shadow-2xl flex items-center justify-center space-x-2"><span>Open Account</span><i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+                            <button onclick="toggleAdminLoginModal()" class="bg-transparent border-2 border-white/30 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition flex items-center justify-center space-x-2"><i data-lucide="shield" class="w-5 h-5"></i><span>Admin Portal</span></button>
+                        </div>
+                        <div class="flex items-center justify-center lg:justify-start space-x-8 pt-4 text-slate-400">
+                            <div class="flex items-center space-x-2"><i data-lucide="shield-check" class="w-5 h-5 text-emerald-400"></i><span class="text-sm">FDIC Insured</span></div>
+                            <div class="flex items-center space-x-2"><i data-lucide="lock" class="w-5 h-5 text-emerald-400"></i><span class="text-sm">256-bit SSL</span></div>
+                        </div>
+                    </div>
+                    <div class="relative lg:block hidden">
+                        <div class="relative floating">
+                            <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&amp;h=500&amp;fit=crop" alt="Digital Banking" class="rounded-3xl shadow-2xl max-w-md mx-auto w-full"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-slate-900 mb-4">Why Choose Global Spire?</h2>
+                    <p class="text-xl text-slate-500 max-w-2xl mx-auto">Experience banking reimagined with cutting-edge technology and unmatched security</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="image-card bg-slate-50 rounded-3xl overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&amp;h=300&amp;fit=crop" alt="Secure Banking" class="w-full h-48 object-cover"/>
+                        <div class="p-6">
+                            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                                <i data-lucide="shield-check" class="w-6 h-6 text-blue-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Bank-Grade Security</h3>
+                            <p class="text-slate-500">256-bit encryption and multi-factor authentication protect your assets 24/7.</p>
+                        </div>
+                    </div>
+                    <div class="image-card bg-slate-50 rounded-3xl overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&amp;h=300&amp;fit=crop" alt="Global Transfers" class="w-full h-48 object-cover"/>
+                        <div class="p-6">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4">
+                                <i data-lucide="globe" class="w-6 h-6 text-emerald-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Global Transfers</h3>
+                            <p class="text-slate-500">Send money to 150+ countries instantly with competitive exchange rates.</p>
+                        </div>
+                    </div>
+                    <div class="image-card bg-slate-50 rounded-3xl overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&amp;h=300&amp;fit=crop" alt="Mobile Banking" class="w-full h-48 object-cover"/>
+                        <div class="p-6">
+                            <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+                                <i data-lucide="smartphone" class="w-6 h-6 text-purple-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Mobile First</h3>
+                            <p class="text-slate-500">Manage your finances on the go with our award-winning mobile app.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 lg:order-1">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&amp;h=500&amp;fit=crop" alt="Global Spire Headquarters" class="rounded-3xl shadow-2xl w-full"/>
+                    </div>
+                    <div class="order-1 lg:order-2 space-y-6">
+                        <h2 class="text-4xl font-bold text-slate-900">Our Global Presence</h2>
+                        <p class="text-lg text-slate-500">With headquarters in major financial centers around the world, Global Spire Credit Union serves over 2 million members across 50 countries. Our state-of-the-art facilities combine cutting-edge technology with personalized service.</p>
+                        <div class="grid grid-cols-3 gap-6 pt-4">
+                            <div class="text-center">
+                                <h3 class="text-3xl font-bold text-blue-600">50+</h3>
+                                <p class="text-sm text-slate-500">Countries</p>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="text-3xl font-bold text-blue-600">2M+</h3>
+                                <p class="text-sm text-slate-500">Members</p>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="text-3xl font-bold text-blue-600">$50B</h3>
+                                <p class="text-sm text-slate-500">Assets Managed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <h2 class="text-4xl font-bold text-slate-900">Next-Generation Banking</h2>
+                        <p class="text-lg text-slate-500">Step into the future of finance with our innovative digital banking platform. Experience seamless transactions, real-time analytics, and AI-powered financial insights.</p>
+                        <ul class="space-y-4">
+                            <li class="flex items-center space-x-3">
+                                <div class="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center">
+                                    <i data-lucide="check" class="w-4 h-4 text-emerald-600"></i>
+                                </div>
+                                <span class="text-slate-700">AI-Powered Financial Insights</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <div class="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center">
+                                    <i data-lucide="check" class="w-4 h-4 text-emerald-600"></i>
+                                </div>
+                                <span class="text-slate-700">Real-Time Transaction Tracking</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <div class="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center">
+                                    <i data-lucide="check" class="w-4 h-4 text-emerald-600"></i>
+                                </div>
+                                <span class="text-slate-700">Biometric Security Authentication</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <div class="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center">
+                                    <i data-lucide="check" class="w-4 h-4 text-emerald-600"></i>
+                                </div>
+                                <span class="text-slate-700">24/7 Global Customer Support</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&amp;h=500&amp;fit=crop" alt="Modern Banking Interior" class="rounded-3xl shadow-2xl w-full"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-gradient-to-br from-blue-900 via-slate-900 to-teal-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-white mb-4">Premium Banking Solutions</h2>
+                    <p class="text-xl text-slate-300 max-w-2xl mx-auto">From everyday banking to wealth management, we have solutions tailored to your needs</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/20 transition">
+                        <img src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?w=400&amp;h=200&amp;fit=crop" alt="Premium Cards" class="w-full h-32 object-cover rounded-xl mb-4"/>
+                        <h3 class="text-lg font-bold text-white mb-2">Premium Cards</h3>
+                        <p class="text-slate-300 text-sm">Exclusive rewards and benefits with our platinum card series.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/20 transition">
+                        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&amp;h=200&amp;fit=crop" alt="Investment Tools" class="w-full h-32 object-cover rounded-xl mb-4"/>
+                        <h3 class="text-lg font-bold text-white mb-2">Smart Investing</h3>
+                        <p class="text-slate-300 text-sm">AI-powered investment recommendations and portfolio management.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/20 transition">
+                        <div class="w-full h-32 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl mb-4 flex items-center justify-center">
+                            <i data-lucide="piggy-bank" class="w-12 h-12 text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Savings Goals</h3>
+                        <p class="text-slate-300 text-sm">Set and track your financial goals with automated savings.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/20 transition">
+                        <div class="w-full h-32 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl mb-4 flex items-center justify-center">
+                            <i data-lucide="briefcase" class="w-12 h-12 text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Business Banking</h3>
+                        <p class="text-slate-300 text-sm">Complete business solutions from startup to enterprise.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-slate-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-4xl font-bold text-slate-900 mb-6">Ready to Get Started?</h2>
+                <p class="text-xl text-slate-500 mb-8">Join millions of satisfied members and experience banking without borders today.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="showSignupPage()" class="bg-gradient-to-r from-blue-600 to-teal-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-xl transition transform hover:scale-105">Open Your Account</button>
+                    <button onclick="toggleLoginModal()" class="bg-white text-slate-900 border-2 border-slate-200 px-8 py-4 rounded-full font-bold text-lg hover:bg-slate-50 transition">Sign In</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="signup-page" class="page-section hidden">
+        <section class="min-h-screen gradient-bg flex items-center justify-center pt-20">
+            <div class="absolute inset-0 overflow-hidden">
+                <div class="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+                <div class="absolute bottom-20 right-10 w-96 h-96 bg-teal-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style="animation-delay: 2s;"></div>
+            </div>
+            <div class="relative max-w-md w-full mx-4">
+                <div class="glass-card rounded-3xl p-8 shadow-2xl">
+                    <button onclick="showPage(&#39;landing-page&#39;)" class="absolute top-4 left-4 text-slate-400 hover:text-slate-600">
+                        <i data-lucide="arrow-left" class="w-6 h-6"></i>
+                    </button>
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-600 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="user-plus" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Create Account</h2>
+                        <p class="text-slate-500 mt-2">Join 2M+ members worldwide</p>
+                    </div>
+                    <form id="signup-form" onsubmit="handleSignup(event)" class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">First Name</label>
+                                <input type="text" id="signup-firstname" required="" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" placeholder="John"/>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Last Name</label>
+                                <input type="text" id="signup-lastname" required="" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" placeholder="Doe"/>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
+                            <input type="email" id="signup-email" required="" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" placeholder="john@example.com"/>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Phone Number</label>
+                            <input type="tel" id="signup-phone" required="" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" placeholder="+1 (555) 000-0000"/>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Password</label>
+                            <div class="relative">
+                                <input type="password" id="signup-password" required="" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" placeholder="Create password"/>
+                                <button type="button" onclick="togglePassword(&#39;signup-password&#39;)" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400"><i data-lucide="eye" class="w-5 h-5"></i></button>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Confirm Password</label>
+                            <input type="password" id="signup-confirm" required="" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" placeholder="Confirm password"/>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="signup-terms" required="" class="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500"/>
+                            <label for="signup-terms" class="ml-2 text-sm text-slate-600">I agree to the <a href="#" class="text-blue-600 hover:underline">Terms of Service</a> and <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a></label>
+                        </div>
+                        <div id="signup-error" class="hidden text-red-500 text-sm text-center"></div>
+                        <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-teal-500 text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg transition transform hover:scale-[1.02] flex items-center justify-center space-x-2">
+                            <span id="signup-btn-text">Create Account</span>
+                            <div id="signup-loader" class="loader hidden"></div>
+                        </button>
+                    </form>
+                    <div class="mt-6 text-center">
+                        <p class="text-slate-500 text-sm">Already have an account? <button onclick="showPage(&#39;landing-page&#39;); toggleLoginModal();" class="text-blue-600 hover:underline font-medium">Sign In</button></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="signup-error-modal" class="fixed inset-0 z-[80] hidden">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="bg-white rounded-3xl p-8 w-full max-w-md shadow-2xl relative slide-in text-center">
+                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="wifi-off" class="w-8 h-8 text-red-600"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">Network Error</h2>
+                <p class="text-slate-500 mb-6">We&#39;re experiencing technical difficulties processing your request. Please try again later or contact our support team.</p>
+                <div class="bg-slate-50 rounded-xl p-4 mb-6 text-left">
+                    <p class="text-sm text-slate-600 mb-2"><strong>Error Code:</strong> NET-500</p>
+                    <p class="text-sm text-slate-600"><strong>Status:</strong> Connection Failed</p>
+                </div>
+                <button onclick="closeSignupErrorModal()" class="w-full bg-gradient-to-r from-blue-600 to-teal-500 text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg transition mb-3">Try Again</button>
+                <button onclick="contactSupport(); closeSignupErrorModal();" class="w-full bg-slate-100 text-slate-700 py-3 rounded-xl font-medium hover:bg-slate-200 transition">Contact Support</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="login-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleLoginModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="bg-white rounded-3xl p-8 w-full max-w-md shadow-2xl relative slide-in">
+                <button onclick="toggleLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-6 h-6"></i></button>
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-600 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-4"><i data-lucide="landmark" class="w-8 h-8 text-white"></i></div>
+                    <h2 class="text-2xl font-bold text-slate-900">Welcome Back</h2>
+                    <p class="text-slate-500 mt-2">Sign in to access your account</p>
+                </div>
+                <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
+                        <input type="email" id="login-email" required="" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" placeholder="Enter your email"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Password</label>
+                        <div class="relative">
+                            <input type="password" id="login-password" required="" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" placeholder="Enter password"/>
+                            <button type="button" onclick="togglePassword(&#39;login-password&#39;)" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400"><i data-lucide="eye" class="w-5 h-5"></i></button>
+                        </div>
+                    </div>
+                    <div id="login-error" class="hidden text-red-500 text-sm text-center"></div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-teal-500 text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg transition transform hover:scale-[1.02] flex items-center justify-center space-x-2"><span id="login-btn-text">Sign In</span><div id="login-loader" class="loader hidden"></div></button>
+                </form>
+                <div class="mt-6 text-center"><a href="#" onclick="alert(&#39;Please contact support to reset your password&#39;); return false;" class="text-blue-600 text-sm hover:underline">Forgot password?</a></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-login-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleAdminLoginModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="glass-dark rounded-3xl p-8 w-full max-w-md shadow-2xl relative slide-in text-white">
+                <button onclick="toggleAdminLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-600 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4"><i data-lucide="shield" class="w-8 h-8 text-white"></i></div>
+                    <h2 class="text-2xl font-bold">Admin Portal</h2>
+                    <p class="text-slate-400 mt-2">Restricted Access Only</p>
+                </div>
+                <form id="admin-login-form" onsubmit="handleAdminLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Admin Username</label>
+                        <input type="text" id="admin-username" required="" class="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-600 text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition" placeholder="Enter username"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Admin Password</label>
+                        <div class="relative">
+                            <input type="password" id="admin-password" required="" class="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-600 text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition" placeholder="Enter password"/>
+                            <button type="button" onclick="togglePassword(&#39;admin-password&#39;)" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400"><i data-lucide="eye" class="w-5 h-5"></i></button>
+                        </div>
+                    </div>
+                    <div id="admin-login-error" class="hidden text-red-400 text-sm text-center"></div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg transition transform hover:scale-[1.02]"><span id="admin-login-btn-text">Access Admin Panel</span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboard-page" class="page-section hidden pt-20 min-h-screen bg-slate-50">
+        <div class="bg-white border-b border-slate-200 sticky top-20 z-40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-4">
+                        <button onclick="showPage(&#39;landing-page&#39;)" class="text-slate-600 hover:text-slate-900"><i data-lucide="arrow-left" class="w-6 h-6"></i></button>
+                        <h1 class="text-2xl font-bold text-slate-900">My Dashboard</h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 transition theme-toggle" title="Toggle Dark Mode">
+                            <i data-lucide="moon" id="dashboard-theme-icon" class="w-5 h-5 text-slate-600"></i>
+                        </button>
+                        <button onclick="toggleNotifications()" class="relative p-2 text-slate-600 hover:text-slate-900"><i data-lucide="bell" class="w-6 h-6"></i><span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full notification-badge"></span></button>
+                        <button onclick="showSettings()" class="flex items-center space-x-2 p-2 text-slate-600 hover:text-slate-900"><i data-lucide="settings" class="w-6 h-6"></i></button>
+                        <button onclick="logout()" class="p-2 text-red-600 hover:text-red-700"><i data-lucide="log-out" class="w-6 h-6"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-6">
+                    <div id="main-card" class="card-gradient rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl">
+                        <div id="account-locked-overlay" class="locked-overlay hidden">
+                            <i data-lucide="lock" class="w-16 h-16 text-white mb-4"></i>
+                            <h3 class="text-2xl font-bold text-white mb-2">Account Locked</h3>
+                            <p class="text-white/80 text-center">Please contact admin to unlock</p>
+                        </div>
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32 blur-3xl"></div>
+                        <div class="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full -ml-24 -mb-24 blur-2xl"></div>
+                        <div class="relative z-10">
+                            <div class="flex justify-between items-start mb-8">
+                                <div>
+                                    <p class="text-blue-100 text-sm mb-1">Current Balance</p>
+                                    <div class="flex items-center space-x-3">
+                                        <h2 id="balance-display" class="text-4xl font-bold hidden-balance select-none">$2,000,000.00</h2>
+                                        <button onclick="toggleBalanceVisibility()" class="p-2 hover:bg-white/20 rounded-full transition"><i data-lucide="eye" id="balance-eye-icon" class="w-6 h-6"></i></button>
+                                    </div>
+                                </div>
+                                <div class="w-12 h-8 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-md flex items-center justify-center"><div class="w-8 h-5 border-2 border-white/30 rounded-sm"></div></div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-blue-100 text-sm">Account Number</span>
+                                    <div class="flex items-center space-x-2">
+                                        <span id="account-number-display" class="font-mono text-lg hidden-balance">**** **** **** 4521</span>
+                                        <button onclick="toggleCardVisibility()" class="p-1 hover:bg-white/20 rounded transition"><i data-lucide="eye-off" id="card-eye-icon" class="w-4 h-4"></i></button>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center"><span class="text-blue-100 text-sm">Routing Number</span><span id="routing-display" class="font-mono hidden-balance">021000021</span></div>
+                                <div class="flex justify-between items-center"><span class="text-blue-100 text-sm">Card Holder</span><span id="card-holder-name" class="font-medium">Loading...</span></div>
+                                <div class="flex justify-between items-center"><span class="text-blue-100 text-sm">Expires</span><span class="font-mono">12/28</span></div>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-4 right-4 opacity-50"><i data-lucide="wifi" class="w-8 h-8 rotate-90"></i></div>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <button onclick="showTransferModal()" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition text-center group"><div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition"><i data-lucide="send" class="w-6 h-6 text-blue-600"></i></div><span class="text-sm font-medium text-slate-700">Transfer</span></button>
+                        <button onclick="showQuickAction(&#39;bills&#39;)" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition text-center group"><div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition"><i data-lucide="receipt" class="w-6 h-6 text-emerald-600"></i></div><span class="text-sm font-medium text-slate-700">Pay Bills</span></button>
+                        <button onclick="showQuickAction(&#39;tv&#39;)" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition text-center group"><div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition"><i data-lucide="tv" class="w-6 h-6 text-purple-600"></i></div><span class="text-sm font-medium text-slate-700">TV Sub</span></button>
+                        <button onclick="showQuickAction(&#39;gift&#39;)" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition text-center group"><div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition"><i data-lucide="gift" class="w-6 h-6 text-pink-600"></i></div><span class="text-sm font-medium text-slate-700">Gift Friend</span></button>
+                        <button onclick="showQuickAction(&#39;atm&#39;)" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition text-center group"><div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition"><i data-lucide="banknote" class="w-6 h-6 text-orange-600"></i></div><span class="text-sm font-medium text-slate-700">ATM/Cheque</span></button>
+                        <button onclick="showHistory()" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition text-center group"><div class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition"><i data-lucide="history" class="w-6 h-6 text-slate-600"></i></div><span class="text-sm font-medium text-slate-700">History</span></button>
+                        <button onclick="showSettings()" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition text-center group"><div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition"><i data-lucide="settings" class="w-6 h-6 text-indigo-600"></i></div><span class="text-sm font-medium text-slate-700">Settings</span></button>
+                        <button onclick="logout()" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition text-center group"><div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition"><i data-lucide="log-out" class="w-6 h-6 text-red-600"></i></div><span class="text-sm font-medium text-slate-700">Logout</span></button>
+                    </div>
+                    <div class="bg-white rounded-2xl p-6 shadow-sm">
+                        <div class="flex justify-between items-center mb-4"><h3 class="text-lg font-bold text-slate-900">Recent Transactions</h3><button onclick="showHistory()" class="text-blue-600 text-sm hover:underline">View All</button></div>
+                        <div id="recent-transactions-list" class="space-y-3"></div>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="bg-white rounded-2xl p-6 shadow-sm">
+                        <div class="flex justify-between items-center mb-4"><h3 class="text-lg font-bold text-slate-900">Notifications</h3><span class="bg-red-500 text-white text-xs px-2 py-1 rounded-full">3</span></div>
+                        <div id="notifications-list" class="space-y-3 max-h-96 overflow-y-auto">
+                            <div class="p-3 bg-blue-50 rounded-xl border-l-4 border-blue-500"><p class="text-sm font-medium text-slate-800">New Feature Available</p><p class="text-xs text-slate-500 mt-1">Instant international transfers now live!</p><p class="text-xs text-slate-400 mt-2">2 hours ago</p></div>
+                            <div class="p-3 bg-emerald-50 rounded-xl border-l-4 border-emerald-500"><p class="text-sm font-medium text-slate-800">Cashback Earned</p><p class="text-xs text-slate-500 mt-1">You earned $45.00 cashback this month</p><p class="text-xs text-slate-400 mt-2">1 day ago</p></div>
+                            <div class="p-3 bg-purple-50 rounded-xl border-l-4 border-purple-500"><p class="text-sm font-medium text-slate-800">Security Alert</p><p class="text-xs text-slate-500 mt-1">New device login detected</p><p class="text-xs text-slate-400 mt-2">2 days ago</p></div>
+                        </div>
+                    </div>
+                    <div class="card-gradient-gold rounded-2xl p-6 text-white">
+                        <div class="flex justify-between items-start mb-4"><div><p class="text-yellow-100 text-sm">Savings Goal</p><h3 class="text-2xl font-bold">Vacation Fund</h3></div><i data-lucide="target" class="w-8 h-8 text-yellow-200"></i></div>
+                        <div class="mb-4"><div class="flex justify-between text-sm mb-2"><span>Progress</span><span>75%</span></div><div class="w-full bg-black/20 rounded-full h-2"><div class="bg-white h-2 rounded-full" style="width: 75%"></div></div></div>
+                        <p class="text-yellow-100 text-sm">$15,000 of $20,000 saved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="transfer-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeTransferModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4 overflow-y-auto">
+            <div class="bg-white rounded-3xl p-8 w-full max-w-lg shadow-2xl relative slide-in my-auto">
+                <button onclick="closeTransferModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-6 h-6"></i></button>
+                <h2 class="text-2xl font-bold text-slate-900 mb-6">Transfer Funds</h2>
+                <form id="transfer-form" onsubmit="handleTransfer(event)" class="space-y-4">
+                    <div><label class="block text-sm font-medium text-slate-700 mb-1">From Account</label><select id="from-account" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 outline-none"><option value="checking">Checking Account (...4521)</option><option value="savings">Savings Account (...8834)</option></select></div>
+                    <div><label class="block text-sm font-medium text-slate-700 mb-1">Select Bank</label><div class="relative"><input type="text" id="bank-search" required="" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 outline-none" placeholder="Search US banks..." onkeyup="filterBanks()"/><i data-lucide="search" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5"></i></div><div id="bank-list" class="mt-2 max-h-40 overflow-y-auto border border-slate-200 rounded-xl hidden"></div></div>
+                    <div><label class="block text-sm font-medium text-slate-700 mb-1">Account Number</label><input type="text" id="recipient-account" required="" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 outline-none" placeholder="Enter recipient account number"/></div>
+                    <div><label class="block text-sm font-medium text-slate-700 mb-1">Amount</label><div class="relative"><span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-500 font-bold">$</span><input type="number" id="transfer-amount" required="" min="1" step="0.01" class="w-full pl-8 pr-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 outline-none" placeholder="0.00"/></div></div>
+                    <div><label class="block text-sm font-medium text-slate-700 mb-1">Transfer PIN</label><input type="password" id="transfer-pin" required="" maxlength="4" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 outline-none" placeholder="Enter 4-digit PIN"/></div>
+                    <div><label class="block text-sm font-medium text-slate-700 mb-1">Description (Optional)</label><input type="text" id="transfer-desc" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 outline-none" placeholder="What&#39;s this for?"/></div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-teal-500 text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg transition">Continue Transfer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="otp-modal" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="bg-white rounded-3xl p-8 w-full max-w-md shadow-2xl relative slide-in text-center">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="shield" class="w-8 h-8 text-blue-600"></i></div>
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">Enter OTP</h2>
+                <p class="text-slate-500 mb-6">Enter the 6-digit code sent to your registered mobile number</p>
+                <div class="flex justify-center space-x-2 mb-6">
+                    <input type="text" maxlength="1" class="otp-input w-12 h-12 text-center text-2xl font-bold border-2 border-slate-200 rounded-xl focus:border-blue-500 outline-none" onkeyup="moveOtpFocus(0)"/>
+                    <input type="text" maxlength="1" class="otp-input w-12 h-12 text-center text-2xl font-bold border-2 border-slate-200 rounded-xl focus:border-blue-500 outline-none" onkeyup="moveOtpFocus(1)"/>
+                    <input type="text" maxlength="1" class="otp-input w-12 h-12 text-center text-2xl font-bold border-2 border-slate-200 rounded-xl focus:border-blue-500 outline-none" onkeyup="moveOtpFocus(2)"/>
+                    <input type="text" maxlength="1" class="otp-input w-12 h-12 text-center text-2xl font-bold border-2 border-slate-200 rounded-xl focus:border-blue-500 outline-none" onkeyup="moveOtpFocus(3)"/>
+                    <input type="text" maxlength="1" class="otp-input w-12 h-12 text-center text-2xl font-bold border-2 border-slate-200 rounded-xl focus:border-blue-500 outline-none" onkeyup="moveOtpFocus(4)"/>
+                    <input type="text" maxlength="1" class="otp-input w-12 h-12 text-center text-2xl font-bold border-2 border-slate-200 rounded-xl focus:border-blue-500 outline-none" onkeyup="moveOtpFocus(5)"/>
+                </div>
+                <button onclick="verifyOTP()" class="w-full bg-gradient-to-r from-blue-600 to-teal-500 text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg transition mb-4">Verify OTP</button>
+                <p class="text-sm text-slate-400">Didn&#39;t receive code? <button class="text-blue-600 hover:underline">Resend</button></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="error-modal" class="fixed inset-0 z-[70] hidden">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="bg-white rounded-3xl p-8 w-full max-w-md shadow-2xl relative slide-in text-center">
+                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="alert-circle" class="w-8 h-8 text-red-600"></i></div>
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">Network Error</h2>
+                <p class="text-slate-500 mb-6">We&#39;re experiencing technical difficulties processing your transfer. Please contact customer support for assistance.</p>
+                <div class="bg-slate-50 rounded-xl p-4 mb-6 text-left"><p class="text-sm text-slate-600 mb-2"><strong>Reference ID:</strong> #TRX-2024-8847</p><p class="text-sm text-slate-600"><strong>Status:</strong> Pending Review</p></div>
+                <button onclick="contactSupport()" class="w-full bg-gradient-to-r from-blue-600 to-teal-500 text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg transition mb-3">Contact Support</button>
+                <button onclick="closeErrorModal()" class="w-full bg-slate-100 text-slate-700 py-3 rounded-xl font-medium hover:bg-slate-200 transition">Try Again Later</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="settings-page" class="page-section hidden pt-20 min-h-screen bg-slate-50">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex items-center space-x-4 mb-8">
+                <button onclick="showDashboard()" class="text-slate-600 hover:text-slate-900"><i data-lucide="arrow-left" class="w-6 h-6"></i></button>
+                <h1 class="text-3xl font-bold text-slate-900">Settings</h1>
+                <button onclick="toggleTheme()" class="ml-auto p-2 rounded-full hover:bg-slate-200 transition theme-toggle" title="Toggle Dark Mode">
+                    <i data-lucide="moon" id="settings-theme-icon" class="w-5 h-5 text-slate-600"></i>
+                </button>
+            </div>
+            <div class="space-y-6">
+                <div class="bg-white rounded-2xl p-6 shadow-sm">
+                    <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center"><i data-lucide="user" class="w-5 h-5 mr-2 text-blue-600"></i>Profile Information</h3>
+                    <form id="profile-form" onsubmit="updateProfile(event)" class="space-y-4">
+                        <div><label class="block text-sm font-medium text-slate-700 mb-1">Full Name</label><input type="text" id="settings-name" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 outline-none"/></div>
+                        <div><label class="block text-sm font-medium text-slate-700 mb-1">Email Address</label><input type="email" id="settings-email" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 outline-none"/></div>
+                        <div><label class="block text-sm font-medium text-slate-700 mb-1">Mobile Number</label><input type="tel" id="settings-phone" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 outline-none"/></div>
+                        <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-blue-700 transition">Save Changes</button>
+                    </form>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-sm">
+                    <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center"><i data-lucide="lock" class="w-5 h-5 mr-2 text-emerald-600"></i>Security</h3>
+                    <form id="password-form" onsubmit="updatePassword(event)" class="space-y-4">
+                        <div><label class="block text-sm font-medium text-slate-700 mb-1">Current Password</label><input type="password" required="" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 outline-none"/></div>
+                        <div><label class="block text-sm font-medium text-slate-700 mb-1">New Password</label><input type="password" id="new-password" required="" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 outline-none"/></div>
+                        <div><label class="block text-sm font-medium text-slate-700 mb-1">Confirm New Password</label><input type="password" id="confirm-password" required="" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 outline-none"/></div>
+                        <button type="submit" class="bg-emerald-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-emerald-700 transition">Update Password</button>
+                    </form>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-sm">
+                    <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center"><i data-lucide="log-out" class="w-5 h-5 mr-2 text-red-600"></i>Session</h3>
+                    <p class="text-slate-500 mb-4">Sign out of your account on this device.</p>
+                    <button onclick="logout()" class="w-full bg-red-50 text-red-600 border border-red-200 py-3 rounded-xl font-medium hover:bg-red-100 transition flex items-center justify-center space-x-2"><i data-lucide="log-out" class="w-5 h-5"></i><span>Logout</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="history-page" class="page-section hidden pt-20 min-h-screen bg-slate-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex items-center space-x-4 mb-8">
+                <button onclick="showDashboard()" class="text-slate-600 hover:text-slate-900"><i data-lucide="arrow-left" class="w-6 h-6"></i></button>
+                <h1 class="text-3xl font-bold text-slate-900">Transaction History</h1>
+                <button onclick="toggleTheme()" class="ml-auto p-2 rounded-full hover:bg-slate-200 transition theme-toggle" title="Toggle Dark Mode">
+                    <i data-lucide="moon" id="history-theme-icon" class="w-5 h-5 text-slate-600"></i>
+                </button>
+            </div>
+            <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+                <div class="p-6 border-b border-slate-200 flex justify-between items-center"><div class="flex space-x-2"><button class="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg text-sm font-medium">2024</button><button class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg text-sm font-medium">2023</button></div><button class="flex items-center space-x-2 text-slate-600 hover:text-slate-900"><i data-lucide="download" class="w-5 h-5"></i><span>Export</span></button></div>
+                <div id="full-history-list" class="divide-y divide-slate-200"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="notifications-panel" class="fixed inset-y-0 right-0 w-full md:w-96 bg-white shadow-2xl z-[80] transform translate-x-full transition-transform duration-300">
+        <div class="p-6 border-b border-slate-200 flex justify-between items-center"><h2 class="text-xl font-bold text-slate-900">Notifications</h2><button onclick="toggleNotifications()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-6 h-6"></i></button></div>
+        <div class="p-6 space-y-4 overflow-y-auto h-full pb-24">
+            <div class="p-4 bg-blue-50 rounded-xl border-l-4 border-blue-500"><div class="flex justify-between items-start mb-2"><h4 class="font-semibold text-slate-800">New Feature Available</h4><span class="text-xs text-slate-400">2h ago</span></div><p class="text-sm text-slate-600">Instant international transfers are now live! Send money to 150+ countries in seconds.</p></div>
+            <div class="p-4 bg-emerald-50 rounded-xl border-l-4 border-emerald-500"><div class="flex justify-between items-start mb-2"><h4 class="font-semibold text-slate-800">Cashback Earned</h4><span class="text-xs text-slate-400">1d ago</span></div><p class="text-sm text-slate-600">You earned $45.00 cashback from your purchases this month. Check your rewards.</p></div>
+            <div class="p-4 bg-purple-50 rounded-xl border-l-4 border-purple-500"><div class="flex justify-between items-start mb-2"><h4 class="font-semibold text-slate-800">Security Alert</h4><span class="text-xs text-slate-400">2d ago</span></div><p class="text-sm text-slate-600">New device login detected from Chrome on Windows. If this wasn&#39;t you, contact support immediately.</p></div>
+            <div class="p-4 bg-orange-50 rounded-xl border-l-4 border-orange-500"><div class="flex justify-between items-start mb-2"><h4 class="font-semibold text-slate-800">Maintenance Notice</h4><span class="text-xs text-slate-400">3d ago</span></div><p class="text-sm text-slate-600">Scheduled maintenance on March 25, 2024 from 2:00 AM - 4:00 AM EST. Services may be limited.</p></div>
+        </div>
+    </div>
+
+    <div id="admin-page" class="page-section hidden pt-20 min-h-screen bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex justify-between items-center mb-8">
+                <div class="flex items-center space-x-4"><button onclick="showPage(&#39;landing-page&#39;)" class="text-slate-400 hover:text-white"><i data-lucide="arrow-left" class="w-6 h-6"></i></button><div><h1 class="text-3xl font-bold">Admin Dashboard</h1><p class="text-slate-400">System Management Portal</p></div></div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-700 transition theme-toggle" title="Toggle Dark Mode">
+                        <i data-lucide="moon" id="admin-theme-icon" class="w-5 h-5 text-slate-300"></i>
+                    </button>
+                    <button onclick="adminLogout()" class="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-lg font-medium transition">Exit Admin</button>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-slate-800 rounded-2xl p-6"><p class="text-slate-400 text-sm mb-1">Total Users</p><h3 class="text-3xl font-bold">2,847</h3><p class="text-emerald-400 text-sm mt-2">+12 this week</p></div>
+                <div class="bg-slate-800 rounded-2xl p-6"><p class="text-slate-400 text-sm mb-1">Active Sessions</p><h3 class="text-3xl font-bold">1,294</h3><p class="text-emerald-400 text-sm mt-2">Currently online</p></div>
+                <div class="bg-slate-800 rounded-2xl p-6"><p class="text-slate-400 text-sm mb-1">Transactions Today</p><h3 class="text-3xl font-bold">$4.2M</h3><p class="text-emerald-400 text-sm mt-2">842 transactions</p></div>
+                <div class="bg-slate-800 rounded-2xl p-6"><p class="text-slate-400 text-sm mb-1">System Status</p><h3 class="text-3xl font-bold text-emerald-400">Operational</h3><p class="text-slate-400 text-sm mt-2">99.9% uptime</p></div>
+            </div>
+            
+            <div class="bg-slate-800 rounded-2xl p-6 mb-8">
+                <h3 class="text-xl font-bold mb-6">User Account Management</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Change User Name</label>
+                        <div class="flex space-x-2">
+                            <input type="text" id="admin-change-name" class="flex-1 px-4 py-3 rounded-xl bg-slate-700 border border-slate-600 text-white focus:border-purple-500 outline-none" placeholder="Enter new name"/>
+                            <button onclick="adminChangeName()" class="bg-purple-600 hover:bg-purple-700 px-4 py-3 rounded-xl font-medium transition">Update</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Add Funds to Balance</label>
+                        <div class="flex space-x-2">
+                            <input type="number" id="admin-add-funds" class="flex-1 px-4 py-3 rounded-xl bg-slate-700 border border-slate-600 text-white focus:border-purple-500 outline-none" placeholder="Enter amount"/>
+                            <button onclick="adminAddFunds()" class="bg-emerald-600 hover:bg-emerald-700 px-4 py-3 rounded-xl font-medium transition">Add</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 flex space-x-4">
+                    <button onclick="adminToggleLock()" id="admin-lock-btn" class="flex-1 bg-red-600 hover:bg-red-700 py-4 rounded-xl font-bold transition flex items-center justify-center space-x-2">
+                        <i data-lucide="lock" class="w-5 h-5"></i><span>Lock Account</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-slate-800 rounded-2xl overflow-hidden mb-8">
+                <div class="p-6 border-b border-slate-700 flex justify-between items-center">
+                    <h3 class="text-xl font-bold">User Transactions</h3>
+                    <button onclick="adminDeleteAllTransactions()" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-sm font-medium transition">Delete All History</button>
+                </div>
+                <div id="admin-transactions-list" class="divide-y divide-slate-700 max-h-96 overflow-y-auto"></div>
+            </div>
+
+            <div class="bg-slate-800 rounded-2xl overflow-hidden">
+                <div class="p-6 border-b border-slate-700"><h3 class="text-xl font-bold">Recent System Logs</h3></div>
+                <div class="divide-y divide-slate-700">
+                    <div class="p-4 flex justify-between items-center hover:bg-slate-700/50 transition"><div class="flex items-center space-x-3"><div class="w-2 h-2 bg-emerald-500 rounded-full"></div><span class="text-sm">Database backup completed successfully</span></div><span class="text-slate-400 text-sm">2 mins ago</span></div>
+                    <div class="p-4 flex justify-between items-center hover:bg-slate-700/50 transition"><div class="flex items-center space-x-3"><div class="w-2 h-2 bg-blue-500 rounded-full"></div><span class="text-sm">New user registration: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3b4e485e497b5e435a564b575e15585456">[email&#160;protected]</a></span></div><span class="text-slate-400 text-sm">5 mins ago</span></div>
+                    <div class="p-4 flex justify-between items-center hover:bg-slate-700/50 transition"><div class="flex items-center space-x-3"><div class="w-2 h-2 bg-yellow-500 rounded-full"></div><span class="text-sm">Security scan initiated</span></div><span class="text-slate-400 text-sm">15 mins ago</span></div>
+                    <div class="p-4 flex justify-between items-center hover:bg-slate-700/50 transition"><div class="flex items-center space-x-3"><div class="w-2 h-2 bg-emerald-500 rounded-full"></div><span class="text-sm">Automated fraud check passed</span></div><span class="text-slate-400 text-sm">1 hour ago</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="quick-action-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeQuickAction()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="bg-white rounded-3xl p-8 w-full max-w-md shadow-2xl relative slide-in">
+                <button onclick="closeQuickAction()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-6 h-6"></i></button>
+                <div id="quick-action-content" class="text-center"></div>
+            </div>
+        </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        lucide.createIcons();
+        
+        const state = { 
+            isLoggedIn: false, 
+            isAdmin: false, 
+            user: null, 
+            balanceHidden: true, 
+            cardHidden: true, 
+            accountLocked: false,
+            darkMode: false,
+            currentUser: { 
+                name: '', 
+                email: '', 
+                phone: '', 
+                accountNumber: '', 
+                routingNumber: '021000021', 
+                balance: 2000000, 
+                transactions: [
+                    { id: 1, date: '2024-03-15', desc: 'Apple Store - iPhone 15 Pro', amount: -999.00, type: 'debit', status: 'completed' }, 
+                    { id: 2, date: '2024-03-14', desc: 'Salary Deposit - Global Tech Inc', amount: 8500.00, type: 'credit', status: 'completed' }, 
+                    { id: 3, date: '2024-03-12', desc: 'Transfer to Savings', amount: -2000.00, type: 'debit', status: 'completed' }, 
+                    { id: 4, date: '2024-03-10', desc: 'Whole Foods Market', amount: -156.43, type: 'debit', status: 'completed' }, 
+                    { id: 5, date: '2024-03-08', desc: 'Netflix Subscription', amount: -15.99, type: 'debit', status: 'completed' }, 
+                    { id: 6, date: '2024-03-05', desc: 'Electric Bill - ConEdison', amount: -142.50, type: 'debit', status: 'completed' }, 
+                    { id: 7, date: '2024-03-01', desc: 'Freelance Payment - Web Design', amount: 3500.00, type: 'credit', status: 'completed' }, 
+                    { id: 8, date: '2024-02-28', desc: 'Uber Ride', amount: -24.50, type: 'debit', status: 'completed' }, 
+                    { id: 9, date: '2024-02-25', desc: 'Amazon.com', amount: -89.99, type: 'debit', status: 'completed' }, 
+                    { id: 10, date: '2024-02-20', desc: 'Stock Dividend - AAPL', amount: 450.00, type: 'credit', status: 'completed' }
+                ] 
+            } 
+        };
+        
+        const usBanks = ['JPMorgan Chase', 'Bank of America', 'Wells Fargo', 'Citibank', 'Goldman Sachs', 'Morgan Stanley', 'U.S. Bancorp', 'PNC Financial Services', 'Truist Financial', 'TD Bank', 'Capital One', 'Charles Schwab', 'State Street', 'BB&T', 'SunTrust Banks', 'HSBC USA', 'Barclays US', 'Ally Financial', 'American Express', 'Discover Financial', 'Fifth Third Bank', 'KeyCorp', 'Regions Financial', 'Citizens Financial', 'M&T Bank', 'Comerica', 'Northern Trust', 'BNY Mellon', 'Silicon Valley Bank', 'First Republic Bank'];
+        
+        let pendingTransfer = null;
+        
+        window.onload = function() { 
+            const savedSession = localStorage.getItem('globalSpireSession'); 
+            const savedState = localStorage.getItem('globalSpireState');
+            const savedTheme = localStorage.getItem('globalSpireTheme');
+            
+            if (savedTheme === 'dark') {
+                state.darkMode = true;
+                document.body.classList.add('dark-mode');
+                updateThemeIcons();
+            }
+            
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                state.currentUser.balance = parsed.balance || state.currentUser.balance;
+                state.currentUser.name = parsed.name || '';
+                state.currentUser.email = parsed.email || '';
+                state.currentUser.phone = parsed.phone || '';
+                state.currentUser.accountNumber = parsed.accountNumber || '';
+                state.accountLocked = parsed.accountLocked || false;
+                if (parsed.transactions) state.currentUser.transactions = parsed.transactions;
+            }
+            if (savedSession) { 
+                const session = JSON.parse(savedSession); 
+                if (session.isLoggedIn) { 
+                    state.isLoggedIn = true; 
+                    state.user = session.user; 
+                    state.currentUser.email = session.user.email; 
+                    state.currentUser.name = session.user.name || 'Valued Customer'; 
+                    state.currentUser.accountNumber = session.user.accountNumber || generateAccountNumber(); 
+                    updateUIForLogin(); 
+                    showDashboard(); 
+                } else if (session.isAdmin) { 
+                    state.isAdmin = true; 
+                    showPage('admin-page'); 
+                    renderAdminTransactions();
+                } 
+            } 
+            if (!state.currentUser.accountNumber) { 
+                state.currentUser.accountNumber = generateAccountNumber(); 
+            } 
+            renderTransactions(); 
+            lucide.createIcons();
+        };
+        
+        function toggleTheme() {
+            state.darkMode = !state.darkMode;
+            if (state.darkMode) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('globalSpireTheme', 'dark');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('globalSpireTheme', 'light');
+            }
+            updateThemeIcons();
+            lucide.createIcons();
+        }
+        
+        function updateThemeIcons() {
+            const icons = document.querySelectorAll('[id$="-theme-icon"], #theme-icon, #theme-icon-mobile');
+            icons.forEach(icon => {
+                if (icon) {
+                    icon.setAttribute('data-lucide', state.darkMode ? 'sun' : 'moon');
+                }
+            });
+        }
+        
+        function saveState() {
+            localStorage.setItem('globalSpireState', JSON.stringify({
+                balance: state.currentUser.balance,
+                name: state.currentUser.name,
+                email: state.currentUser.email,
+                phone: state.currentUser.phone,
+                accountNumber: state.currentUser.accountNumber,
+                accountLocked: state.accountLocked,
+                transactions: state.currentUser.transactions
+            }));
+        }
+        
+        function generateAccountNumber() { return '45' + Math.floor(1000000000 + Math.random() * 9000000000); }
+        
+        function showPage(pageId) { 
+            document.querySelectorAll('.page-section').forEach(page => { page.classList.add('hidden'); }); 
+            document.getElementById(pageId).classList.remove('hidden'); 
+            window.scrollTo(0, 0); 
+            lucide.createIcons(); 
+        }
+        
+        function showDashboard() { 
+            if (state.accountLocked) {
+                showPage('dashboard-page');
+                document.getElementById('account-locked-overlay').classList.remove('hidden');
+                document.getElementById('main-card').classList.remove('card-gradient');
+                document.getElementById('main-card').classList.add('card-gradient-locked');
+            } else {
+                showPage('dashboard-page'); 
+                document.getElementById('account-locked-overlay').classList.add('hidden');
+                document.getElementById('main-card').classList.add('card-gradient');
+                document.getElementById('main-card').classList.remove('card-gradient-locked');
+            }
+            updateDashboardInfo(); 
+        }
+        
+        function showSignupPage() {
+            showPage('signup-page');
+        }
+        
+        function handleSignup(e) {
+            e.preventDefault();
+            const password = document.getElementById('signup-password').value;
+            const confirm = document.getElementById('signup-confirm').value;
+            const errorDiv = document.getElementById('signup-error');
+            const btnText = document.getElementById('signup-btn-text');
+            const loader = document.getElementById('signup-loader');
+            
+            if (password !== confirm) {
+                errorDiv.textContent = 'Passwords do not match';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+            
+            btnText.textContent = 'Creating Account...';
+            loader.classList.remove('hidden');
+            
+            setTimeout(() => {
+                document.getElementById('signup-modal')?.classList.add('hidden');
+                document.getElementById('signup-error-modal').classList.remove('hidden');
+                btnText.textContent = 'Create Account';
+                loader.classList.add('hidden');
+            }, 2000);
+        }
+        
+        function closeSignupErrorModal() {
+            document.getElementById('signup-error-modal').classList.add('hidden');
+        }
+        
+        function toggleLoginModal() { 
+            const modal = document.getElementById('login-modal'); 
+            modal.classList.toggle('hidden'); 
+            if (!modal.classList.contains('hidden')) { 
+                document.getElementById('login-email').value = ''; 
+                document.getElementById('login-password').value = ''; 
+                document.getElementById('login-error').classList.add('hidden'); 
+            } 
+        }
+        
+        function toggleAdminLoginModal() { 
+            const modal = document.getElementById('admin-login-modal'); 
+            modal.classList.toggle('hidden'); 
+        }
+        
+        function handleLogin(e) { 
+            e.preventDefault(); 
+            const email = document.getElementById('login-email').value; 
+            const password = document.getElementById('login-password').value; 
+            const errorDiv = document.getElementById('login-error'); 
+            const btnText = document.getElementById('login-btn-text'); 
+            const loader = document.getElementById('login-loader'); 
+            btnText.textContent = 'Signing in...'; 
+            loader.classList.remove('hidden'); 
+            setTimeout(() => { 
+                state.isLoggedIn = true; 
+                state.user = { email: email, name: email.split('@')[0], accountNumber: generateAccountNumber() }; 
+                state.currentUser.email = email; 
+                state.currentUser.name = state.user.name; 
+                state.currentUser.accountNumber = state.user.accountNumber; 
+                localStorage.setItem('globalSpireSession', JSON.stringify({ isLoggedIn: true, user: state.user })); 
+                saveState();
+                toggleLoginModal(); 
+                updateUIForLogin(); 
+                showDashboard(); 
+                btnText.textContent = 'Sign In'; 
+                loader.classList.add('hidden'); 
+            }, 1000); 
+        }
+        
+        function handleAdminLogin(e) { 
+            e.preventDefault(); 
+            const username = document.getElementById('admin-username').value; 
+            const password = document.getElementById('admin-password').value; 
+            const errorDiv = document.getElementById('admin-login-error'); 
+            if (username === 'admin' && password === 'admin123') { 
+                state.isAdmin = true; 
+                localStorage.setItem('globalSpireSession', JSON.stringify({ isAdmin: true })); 
+                toggleAdminLoginModal(); 
+                showPage('admin-page'); 
+                renderAdminTransactions();
+            } else { 
+                errorDiv.textContent = 'Invalid admin credentials'; 
+                errorDiv.classList.remove('hidden'); 
+            } 
+        }
+        
+        function updateUIForLogin() { 
+            document.getElementById('nav-links').innerHTML = `
+                <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 transition theme-toggle" title="Toggle Dark Mode">
+                    <i data-lucide="${state.darkMode ? 'sun' : 'moon'}" class="w-5 h-5 text-slate-600"></i>
+                </button>
+                <button onclick="showDashboard()" class="text-slate-600 hover:text-blue-600 font-medium transition">Dashboard</button>
+                <button onclick="logout()" class="bg-red-50 text-red-600 px-6 py-2.5 rounded-full font-medium hover:bg-red-100 transition">Logout</button>
+            `; 
+        }
+        
+        function updateDashboardInfo() { 
+            document.getElementById('card-holder-name').textContent = state.currentUser.name || 'Valued Customer'; 
+            document.getElementById('account-number-display').textContent = '**** **** **** ' + state.currentUser.accountNumber.slice(-4); 
+            document.getElementById('routing-display').textContent = state.currentUser.routingNumber; 
+            document.getElementById('settings-name').value = state.currentUser.name; 
+            document.getElementById('settings-email').value = state.currentUser.email; 
+            document.getElementById('settings-phone').value = state.currentUser.phone || '(555) 123-4567'; 
+        }
+        
+        function toggleBalanceVisibility() { 
+            const balanceEl = document.getElementById('balance-display'); 
+            const eyeIcon = document.getElementById('balance-eye-icon'); 
+            state.balanceHidden = !state.balanceHidden; 
+            if (state.balanceHidden) { 
+                balanceEl.classList.add('hidden-balance'); 
+                eyeIcon.setAttribute('data-lucide', 'eye'); 
+            } else { 
+                balanceEl.classList.remove('hidden-balance'); 
+                balanceEl.textContent = '$' + state.currentUser.balance.toLocaleString('en-US', {minimumFractionDigits: 2}); 
+                eyeIcon.setAttribute('data-lucide', 'eye-off'); 
+            } 
+            lucide.createIcons(); 
+        }
+        
+        function toggleCardVisibility() { 
+            const accNumEl = document.getElementById('account-number-display'); 
+            const routEl = document.getElementById('routing-display'); 
+            const eyeIcon = document.getElementById('card-eye-icon'); 
+            state.cardHidden = !state.cardHidden; 
+            if (state.cardHidden) { 
+                accNumEl.classList.add('hidden-balance'); 
+                routEl.classList.add('hidden-balance'); 
+                eyeIcon.setAttribute('data-lucide', 'eye-off'); 
+            } else { 
+                accNumEl.classList.remove('hidden-balance'); 
+                routEl.classList.remove('hidden-balance'); 
+                accNumEl.textContent = state.currentUser.accountNumber; 
+                routEl.textContent = state.currentUser.routingNumber; 
+                eyeIcon.setAttribute('data-lucide', 'eye'); 
+            } 
+            lucide.createIcons(); 
+        }
+        
+        function showTransferModal() { 
+            if (state.accountLocked) {
+                alert('Your account is locked. Please contact admin to unlock.');
+                return;
+            }
+            document.getElementById('transfer-modal').classList.remove('hidden'); 
+            populateBankList(); 
+        }
+        
+        function closeTransferModal() { 
+            document.getElementById('transfer-modal').classList.add('hidden'); 
+            document.getElementById('transfer-form').reset(); 
+        }
+        
+        function populateBankList() { 
+            const bankList = document.getElementById('bank-list'); 
+            bankList.innerHTML = usBanks.map(bank => `<div class="p-3 hover:bg-slate-100 cursor-pointer border-b border-slate-100 last:border-0" onclick="selectBank('${bank}')">${bank}</div>`).join(''); 
+        }
+        
+        function filterBanks() { 
+            const search = document.getElementById('bank-search').value.toLowerCase(); 
+            const bankList = document.getElementById('bank-list'); 
+            if (search.length > 0) { 
+                bankList.classList.remove('hidden'); 
+                const filtered = usBanks.filter(bank => bank.toLowerCase().includes(search)); 
+                bankList.innerHTML = filtered.map(bank => `<div class="p-3 hover:bg-slate-100 cursor-pointer border-b border-slate-100 last:border-0" onclick="selectBank('${bank}')">${bank}</div>`).join(''); 
+            } else { 
+                bankList.classList.add('hidden'); 
+            } 
+        }
+        
+        function selectBank(bank) { 
+            document.getElementById('bank-search').value = bank; 
+            document.getElementById('bank-list').classList.add('hidden'); 
+        }
+        
+        function handleTransfer(e) { 
+            e.preventDefault(); 
+            const amount = parseFloat(document.getElementById('transfer-amount').value);
+            const pin = document.getElementById('transfer-pin').value;
+            const bank = document.getElementById('bank-search').value;
+            const recipientAccount = document.getElementById('recipient-account').value;
+            const desc = document.getElementById('transfer-desc').value || 'Transfer to ' + bank;
+            
+            if (amount > state.currentUser.balance) {
+                alert('Insufficient funds');
+                return;
+            }
+            
+            pendingTransfer = {
+                amount: amount,
+                bank: bank,
+                recipientAccount: recipientAccount,
+                desc: desc
+            };
+            
+            closeTransferModal(); 
+            showOTPModal(); 
+        }
+        
+        function showOTPModal() { 
+            document.getElementById('otp-modal').classList.remove('hidden'); 
+            document.querySelectorAll('.otp-input')[0].focus(); 
+        }
+        
+        function moveOtpFocus(index) { 
+            const inputs = document.querySelectorAll('.otp-input'); 
+            if (inputs[index].value && index < 5) { 
+                inputs[index + 1].focus(); 
+            } 
+        }
+        
+        function verifyOTP() { 
+            const inputs = document.querySelectorAll('.otp-input'); 
+            const otp = Array.from(inputs).map(input => input.value).join(''); 
+            if (otp.length === 6) { 
+                document.getElementById('otp-modal').classList.add('hidden'); 
+                inputs.forEach(input => input.value = '');
+                
+                if (pendingTransfer) {
+                    state.currentUser.balance -= pendingTransfer.amount;
+                    const newTransaction = {
+                        id: state.currentUser.transactions.length + 1,
+                        date: new Date().toISOString().split('T')[0],
+                        desc: pendingTransfer.desc,
+                        amount: -pendingTransfer.amount,
+                        type: 'debit',
+                        status: 'completed'
+                    };
+                    state.currentUser.transactions.unshift(newTransaction);
+                    saveState();
+                    renderTransactions();
+                    pendingTransfer = null;
+                }
+                
+                showErrorModal(); 
+            } else { 
+                alert('Please enter all 6 digits'); 
+            } 
+        }
+        
+        function showErrorModal() { 
+            document.getElementById('error-modal').classList.remove('hidden'); 
+        }
+        
+        function closeErrorModal() { 
+            document.getElementById('error-modal').classList.add('hidden'); 
+        }
+        
+        function contactSupport() { 
+            alert('Connecting to customer support...\n\nSupport Line: 1-800-GLOBAL-SPIRE\nEmail: suppportgloblalspire@gmail.com\n\nReference: #TRX-2024-8847'); 
+        }
+        
+        function showQuickAction(action) { 
+            if (state.accountLocked) {
+                alert('Your account is locked. Please contact admin to unlock.');
+                return;
+            }
+            const modal = document.getElementById('quick-action-modal'); 
+            const content = document.getElementById('quick-action-content'); 
+            const actions = { 
+                bills: { icon: 'receipt', color: 'emerald', title: 'Pay Bills', desc: 'Pay your utility bills, rent, and more' }, 
+                tv: { icon: 'tv', color: 'purple', title: 'TV Subscription', desc: 'Renew your cable and streaming subscriptions' }, 
+                gift: { icon: 'gift', color: 'pink', title: 'Gift a Friend', desc: 'Send money as a gift to friends and family' }, 
+                atm: { icon: 'banknote', color: 'orange', title: 'ATM/Cheque Deposit', desc: 'Find nearby ATMs or deposit a check' } 
+            }; 
+            const a = actions[action]; 
+            content.innerHTML = `<div class="w-16 h-16 bg-${a.color}-100 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="${a.icon}" class="w-8 h-8 text-${a.color}-600"></i></div><h3 class="text-2xl font-bold text-slate-900 mb-2">${a.title}</h3><p class="text-slate-500 mb-6">${a.desc}</p><button onclick="alert('Feature coming soon!')" class="w-full bg-${a.color}-600 text-white py-3 rounded-xl font-bold hover:bg-${a.color}-700 transition">Continue</button>`; 
+            modal.classList.remove('hidden'); 
+            lucide.createIcons(); 
+        }
+        
+        function closeQuickAction() { 
+            document.getElementById('quick-action-modal').classList.add('hidden'); 
+        }
+        
+        function showSettings() { 
+            showPage('settings-page'); 
+            updateDashboardInfo(); 
+        }
+        
+        function updateProfile(e) { 
+            e.preventDefault(); 
+            state.currentUser.name = document.getElementById('settings-name').value; 
+            state.currentUser.email = document.getElementById('settings-email').value; 
+            state.currentUser.phone = document.getElementById('settings-phone').value; 
+            const session = JSON.parse(localStorage.getItem('globalSpireSession') || '{}'); 
+            session.user = state.user; 
+            session.user.name = state.currentUser.name; 
+            localStorage.setItem('globalSpireSession', JSON.stringify(session)); 
+            saveState();
+            alert('Profile updated successfully!'); 
+            showDashboard(); 
+        }
+        
+        function updatePassword(e) { 
+            e.preventDefault(); 
+            const newPass = document.getElementById('new-password').value; 
+            const confirmPass = document.getElementById('confirm-password').value; 
+            if (newPass !== confirmPass) { 
+                alert('Passwords do not match!'); 
+                return; 
+            } 
+            if (newPass.length < 6) { 
+                alert('Password must be at least 6 characters long!'); 
+                return; 
+            } 
+            alert('Password updated successfully!'); 
+            document.getElementById('password-form').reset(); 
+        }
+        
+        function showHistory() { 
+            showPage('history-page'); 
+            renderFullHistory(); 
+        }
+        
+        function renderTransactions() { 
+            const list = document.getElementById('recent-transactions-list'); 
+            const recent = state.currentUser.transactions.slice(0, 5); 
+            list.innerHTML = recent.map(t => `<div class="flex justify-between items-center p-4 bg-slate-50 rounded-xl hover:bg-slate-100 transition"><div class="flex items-center space-x-3"><div class="w-10 h-10 ${t.type === 'credit' ? 'bg-emerald-100' : 'bg-red-100'} rounded-full flex items-center justify-center"><i data-lucide="${t.type === 'credit' ? 'arrow-down-left' : 'arrow-up-right'}" class="w-5 h-5 ${t.type === 'credit' ? 'text-emerald-600' : 'text-red-600'}"></i></div><div><p class="font-semibold text-slate-800 text-sm">${t.desc}</p><p class="text-xs text-slate-500">${formatDate(t.date)}</p></div></div><span class="font-bold ${t.type === 'credit' ? 'text-emerald-600' : 'text-red-600'}">${t.type === 'credit' ? '+' : ''}$${Math.abs(t.amount).toLocaleString('en-US', {minimumFractionDigits: 2})}</span></div>`).join(''); 
+            lucide.createIcons(); 
+        }
+        
+        function renderFullHistory() { 
+            const list = document.getElementById('full-history-list'); 
+            const transactions = state.currentUser.transactions.filter(t => t.date.startsWith('2024')); 
+            list.innerHTML = transactions.map(t => `<div class="p-6 flex justify-between items-center hover:bg-slate-50 transition"><div class="flex items-center space-x-4"><div class="w-12 h-12 ${t.type === 'credit' ? 'bg-emerald-100' : 'bg-red-100'} rounded-full flex items-center justify-center"><i data-lucide="${t.type === 'credit' ? 'arrow-down-left' : 'arrow-up-right'}" class="w-6 h-6 ${t.type === 'credit' ? 'text-emerald-600' : 'text-red-600'}"></i></div><div><p class="font-semibold text-slate-800">${t.desc}</p><p class="text-sm text-slate-500">${formatDate(t.date)} • ${t.status}</p></div></div><div class="text-right"><span class="font-bold text-lg ${t.type === 'credit' ? 'text-emerald-600' : 'text-red-600'}">${t.type === 'credit' ? '+' : ''}$${Math.abs(t.amount).toLocaleString('en-US', {minimumFractionDigits: 2})}</span><p class="text-xs text-slate-400 mt-1">Ref: #TRX-${t.id.toString().padStart(6, '0')}</p></div></div>`).join(''); 
+            lucide.createIcons(); 
+        }
+        
+        function formatDate(dateStr) { 
+            const date = new Date(dateStr); 
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); 
+        }
+        
+        function toggleNotifications() { 
+            const panel = document.getElementById('notifications-panel'); 
+            if (panel.classList.contains('translate-x-full')) { 
+                panel.classList.remove('translate-x-full'); 
+            } else { 
+                panel.classList.add('translate-x-full'); 
+            } 
+        }
+        
+        function logout() { 
+            if (confirm('Are you sure you want to logout?')) { 
+                state.isLoggedIn = false; 
+                state.isAdmin = false; 
+                state.user = null; 
+                localStorage.removeItem('globalSpireSession'); 
+                document.getElementById('nav-links').innerHTML = `
+                    <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 transition theme-toggle" title="Toggle Dark Mode">
+                        <i data-lucide="${state.darkMode ? 'sun' : 'moon'}" class="w-5 h-5 text-slate-600"></i>
+                    </button>
+                    <button onclick="toggleLoginModal()" class="text-slate-600 hover:text-blue-600 font-medium transition">Sign In</button>
+                    <button onclick="showSignupPage()" class="bg-slate-900 text-white px-6 py-2.5 rounded-full font-medium hover:bg-slate-800 transition transform hover:scale-105">Open Account</button>
+                `; 
+                showPage('landing-page'); 
+                lucide.createIcons(); 
+            } 
+        }
+        
+        function adminLogout() { 
+            state.isAdmin = false; 
+            localStorage.removeItem('globalSpireSession'); 
+            showPage('landing-page'); 
+        }
+        
+        function togglePassword(inputId) { 
+            const input = document.getElementById(inputId); 
+            input.type = input.type === 'password' ? 'text' : 'password'; 
+        }
+        
+        function toggleMobileMenu() { 
+            document.getElementById('mobile-menu').classList.toggle('hidden'); 
+        }
+        
+        function adminChangeName() {
+            const newName = document.getElementById('admin-change-name').value;
+            if (newName) {
+                state.currentUser.name = newName;
+                saveState();
+                alert('User name updated to: ' + newName);
+                document.getElementById('admin-change-name').value = '';
+            }
+        }
+        
+        function adminAddFunds() {
+            const amount = parseFloat(document.getElementById('admin-add-funds').value);
+            if (amount && amount > 0) {
+                state.currentUser.balance += amount;
+                const newTransaction = {
+                    id: state.currentUser.transactions.length + 1,
+                    date: new Date().toISOString().split('T')[0],
+                    desc: 'Admin Fund Addition',
+                    amount: amount,
+                    type: 'credit',
+                    status: 'completed'
+                };
+                state.currentUser.transactions.unshift(newTransaction);
+                saveState();
+                alert('$' + amount.toLocaleString() + ' added to account balance');
+                document.getElementById('admin-add-funds').value = '';
+                renderAdminTransactions();
+            }
+        }
+        
+        function adminToggleLock() {
+            state.accountLocked = !state.accountLocked;
+            saveState();
+            const btn = document.getElementById('admin-lock-btn');
+            if (state.accountLocked) {
+                btn.innerHTML = '<i data-lucide="unlock" class="w-5 h-5"></i><span>Unlock Account</span>';
+                btn.classList.remove('bg-red-600', 'hover:bg-red-700');
+                btn.classList.add('bg-emerald-600', 'hover:bg-emerald-700');
+                alert('Account has been LOCKED');
+            } else {
+                btn.innerHTML = '<i data-lucide="lock" class="w-5 h-5"></i><span>Lock Account</span>';
+                btn.classList.add('bg-red-600', 'hover:bg-red-700');
+                btn.classList.remove('bg-emerald-600', 'hover:bg-emerald-700');
+                alert('Account has been UNLOCKED');
+            }
+            lucide.createIcons();
+        }
+        
+        function adminDeleteAllTransactions() {
+            if (confirm('Are you sure you want to delete ALL transaction history? This cannot be undone.')) {
+                state.currentUser.transactions = [];
+                saveState();
+                renderAdminTransactions();
+                alert('All transaction history deleted');
+            }
+        }
+        
+        function adminDeleteTransaction(id) {
+            if (confirm('Delete this transaction?')) {
+                state.currentUser.transactions = state.currentUser.transactions.filter(t => t.id !== id);
+                saveState();
+                renderAdminTransactions();
+            }
+        }
+        
+        function renderAdminTransactions() {
+            const list = document.getElementById('admin-transactions-list');
+            if (!list) return;
+            list.innerHTML = state.currentUser.transactions.map(t => `<div class="p-4 flex justify-between items-center hover:bg-slate-700/50 transition"><div class="flex items-center space-x-3"><div class="w-2 h-2 ${t.type === 'credit' ? 'bg-emerald-500' : 'bg-red-500'} rounded-full"></div><div><span class="text-sm">${t.desc}</span><p class="text-xs text-slate-400">${t.date} • ${t.type === 'credit' ? '+' : ''}$${Math.abs(t.amount).toLocaleString()}</p></div></div><button onclick="adminDeleteTransaction(${t.id})" class="text-red-400 hover:text-red-300 text-sm"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div>`).join('');
+            lucide.createIcons();
+        }
+        
+        document.addEventListener('keydown', function(e) { 
+            if (e.key === 'Escape') { 
+                document.getElementById('login-modal').classList.add('hidden'); 
+                document.getElementById('admin-login-modal').classList.add('hidden'); 
+                document.getElementById('transfer-modal').classList.add('hidden'); 
+                document.getElementById('otp-modal').classList.add('hidden'); 
+                document.getElementById('error-modal').classList.add('hidden'); 
+                document.getElementById('signup-error-modal').classList.add('hidden');
+                document.getElementById('quick-action-modal').classList.add('hidden'); 
+                document.getElementById('notifications-panel').classList.add('translate-x-full'); 
+            } 
+        });
+        
+        window.addEventListener('popstate', function(e) {
+            e.preventDefault();
+            if (state.isLoggedIn) {
+                showDashboard();
+            } else if (state.isAdmin) {
+                showPage('admin-page');
+            } else {
+                showPage('landing-page');
+            }
+        });
+        
+        lucide.createIcons();
+    </script>
+
+</body></html>
